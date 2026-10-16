@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Idônea brand tokens — values come from the client's brand PDF
+   (navy #000F45, blue #1E5EEB / #1B54D6 / #0B4294, cyan #00AEEF, greys #1A1F2B / #1B2A33). */
+:root {
+  --bg: 244 246 250;
+  --rail: 255 255 255;
+  --surface: 255 255 255;
+  --raised: 248 250 253;
+  --hover: 238 241 247;
+  --line: 226 231 240;
+  --ink: 17 22 38;
+  --ink-2: 82 92 115;
+  --ink-3: 128 138 160;
+  --brand: 30 94 235;
+  --brand-strong: 27 84 214;
+  --cyan: 0 150 210;
+  --navy: 0 15 69;
+  --danger: 220 38 38;
+  --warn: 202 125 0;
+  --ok: 22 150 90;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 15 19 28;
+  --rail: 12 15 23;
+  --surface: 22 27 38;
+  --raised: 30 36 50;
+  --hover: 37 44 59;
+  --line: 42 49 66;
+  --ink: 233 237 245;
+  --ink-2: 163 173 194;
+  --ink-3: 112 121 144;
+  --brand: 59 123 255;
+  --brand-strong: 30 94 235;
+  --cyan: 0 174 239;
+  --navy: 0 15 69;
+  --danger: 248 92 92;
+  --warn: 245 176 65;
+  --ok: 52 199 123;
+  color-scheme: dark;
+}
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 14px;
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  ::selection { background: rgb(var(--brand) / 0.35); }
+  * { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+}
+
+@layer components {
+  .card { @apply bg-surface border border-line rounded-2xl; }
+  .btn { @apply inline-flex items-center justify-center gap-2 h-9 px-3.5 rounded-lg text-[13px] font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none; }
+  .btn-primary { @apply btn bg-brand-strong text-white hover:bg-brand shadow-glow; }
+  .btn-ghost { @apply btn text-ink-2 hover:bg-hover hover:text-ink; }
+  .btn-outline { @apply btn border border-line text-ink hover:bg-hover; }
+  .input { @apply h-9 w-full rounded-lg bg-raised border border-line px-3 text-[13px] text-ink placeholder:text-ink-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/25 transition; }
+  .label { @apply text-[11px] font-semibold uppercase tracking-[.08em] text-ink-3; }
+  .chip { @apply inline-flex items-center gap-1.5 h-6 px-2 rounded-md text-[12px] font-medium whitespace-nowrap; }
+  .icon-btn { @apply inline-flex items-center justify-center h-8 w-8 rounded-lg text-ink-2 hover:bg-hover hover:text-ink transition-colors; }
+  .tnum { font-variant-numeric: tabular-nums; }
+}
+
+@media print {
+  aside, header, .no-print { display: none !important; }
+}
